@@ -1,3 +1,7 @@
-<h1>Create</h1>
+<h1>Create a list</h1>
 
-<h2>List</h2>
+<%= simple_form_for @list do |f| %>
+  <%= f.input :name %>
+  <%= f.input :photo, as: :file %>
+  <%= f.submit %>
+<% end %>
