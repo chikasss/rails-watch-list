@@ -5,13 +5,15 @@
 <h3>Movies</h3>
 
 <ul>
-<%# @movies.each do |movie| %>
-  <li><%#= @movie.title %></li>
-  <li><%#= @movie.overview %></li>
-  <li><%#= @movie.rating %></li>
+  <% @list.movies.each do |movie|  %>
+  <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
+  <%= cl_image_tag @list.photo.key, height: 300, width: 400, crop: :fill %>
+  <%= movie.title  %>
+  <%= movie.rating  %>
+  <%= movie.overview %>
+  <%= bookmark.comment %>
+  <%= link_to"delete", bookmark_path(bookmark), data: {_method: :delete, turbo_confirm: "Are you sure?"} %>
+  <% end %>
 </ul>
 
- <%# t.string "title"
-    t.text "overview"
-    t.text "poster_url"
-    t.integer "rating" %>
+<%= link_to "delete this list", list_path(@list), class: "btn btn-cancel", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
